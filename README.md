@@ -1,16 +1,68 @@
 # e043_flutter_setstate_initstate_problem
 
-A new Flutter project.
+## Screen Record
 
-## Getting Started
+![app screen record](docs/screen_record.gif)
 
-This project is a starting point for a Flutter application.
+## What
 
-A few resources to get you started if this is your first Flutter project:
+- the setState not updating the UI when variables is manipulated inside build method
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Problem Code
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+    class _MyHomePageState extends State<MyHomePage> {
+        int _counter;
+
+        @override
+        Widget build(BuildContext context) {
+        _counter = 0;
+        }
+
+        void _incrementCounter() {
+            setState(() {
+                _counter++;
+            });
+        }
+    }
+
+## solution A Code
+
+    class _MyHomePageState extends State<MyHomePage> {
+        int _counter = 0;
+
+        @override
+        Widget build(BuildContext context) {
+        //_counter = 0;
+        }
+
+        void _incrementCounter() {
+            setState(() {
+                _counter++;
+            });
+        }
+    }
+
+## solution B Code
+
+    class _MyHomePageState extends State<MyHomePage> {
+        //int _counter = 0;
+        int _counter ;
+
+        @override
+        void initState() {
+            super.initState();
+            _counter = 0;
+        }
+        @override
+        Widget build(BuildContext context) {
+        //_counter = 0;
+        }
+
+        void _incrementCounter() {
+            setState(() {
+                _counter++;
+            });
+        }
+    }
+
+## Ref
